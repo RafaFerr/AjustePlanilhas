@@ -1,5 +1,5 @@
 import logging
-logging.basicConfig(level=logging.INFO, filename="log.txt", format="%(asctime)s $ %(message)s",datefmt='%d/%m/%Y %I:%M:%S %p')
+logging.basicConfig(level=logging.INFO, filename="C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\logs\log_validar_qualificacao_patricia.csv", format="%(asctime)s $ %(message)s",datefmt='%d/%m/%Y %I:%M:%S %p')
 
 # Import for the Desktop Bot
 from botcity.core import DesktopBot
@@ -13,8 +13,8 @@ from botcity.plugins.excel import BotExcelPlugin
 
 
 def main():
-    planilha = BotExcelPlugin().read(r"C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\planilha\QUALIFICACAO.xlsx").set_nan_as(value='')
-    planilha.set_active_sheet('qualif')
+    planilha = BotExcelPlugin().read(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx").set_nan_as(value='')
+    planilha.set_active_sheet('Geral')
 
     dados = planilha.as_list()[1:]
 
