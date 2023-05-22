@@ -1,5 +1,8 @@
 from botcity.core import DesktopBot
 from botcity.plugins.excel import BotExcelPlugin
+import logging
+logging.basicConfig(level=logging.INFO, filename="C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\logs\log_ajuste_patricia.csv", format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
+
 
 
 '''
@@ -25,8 +28,8 @@ Carimbo de data/hora,  E-mail, MATRICULA,NUMERO DO ATO,QUALIFICACAO, CPF/CNPJ, N
 class Bot(DesktopBot):
     def action(self, execution=None):
 
-        planilha = BotExcelPlugin().read(r"C:\Users\rafael\Downloads\CORREÇÃO DAS ORDEM DOS ATOS DO 1º LOTE.xlsx").set_nan_as(value='')
-        planilha.set_active_sheet('plan1')
+        planilha = BotExcelPlugin().read(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx").set_nan_as(value='')
+        planilha.set_active_sheet('Página1')
 
 
         dados = planilha.as_list()[1:]
@@ -38,6 +41,7 @@ class Bot(DesktopBot):
             op2 = dados[11]#operacao de registro
             num2 = dados[12]#numero de ato de registro
             dt2 = dados[13]#data do ato de registro
+
             print(index)
             if op1 == '' and op2 != '':
                 planilha.set_cell('F', index, op2)
@@ -51,11 +55,29 @@ class Bot(DesktopBot):
                 continue
         self.wait(2000)
         planilha.remove_columns(['I', 'J', 'K', 'L', 'M', 'N'])
-        planilha.write(r'C:\Users\rafael\Downloads\CORREÇÃO DAS ORDEM DOS ATOS DO 1º LOTE.xlsx')
+        planilha.write(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx")
         self.wait(10000)
-        print('ACABOU')
+        print('FINALIZOU AJUSTE')
+        planilha = BotExcelPlugin().read(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx").set_nan_as(
+            value='')
+        planilha.set_active_sheet('Página1')
 
-        self.execute(r'C:\Users\rafael\Downloads\CORREÇÃO DAS ORDEM DOS ATOS DO 1º LOTE.xlsx')
+        dados = planilha.as_list()[1:]
+        for index, dados in enumerate(dados, start=2):
+            operacao = dados[5]
+            operacaostring = str(operacao)
+            numeroato = dados[6]
+            numero = str(numeroato)
+            matricula = dados[2]
+            if operacaostring == 'Abertura de matrícula' and numeroato != 0:
+                logging.info(f'Matricula {matricula} $ {operacaostring} $ ATO_{numeroato} $ DIFERENTE DE 0')
+            else:
+
+                pass
+
+
+        print('FINALIZADO - ABRINDO PLANILHA')
+        self.execute(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx")
         '''
         if not self.find("colunaH", matching=0.97, waiting_time=10000):
             self.not_found("colunaH")
