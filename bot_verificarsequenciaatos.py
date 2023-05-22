@@ -1,5 +1,5 @@
 import logging
-logging.basicConfig(level=logging.INFO, filename="log_sequencia.csv", format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
+logging.basicConfig(level=logging.INFO, filename="C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\logs\log_sequenciaatos_patricia.csv", format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
 
 from botcity.core import DesktopBot
 from botcity.plugins.excel import BotExcelPlugin
@@ -13,14 +13,9 @@ from botcity.plugins.excel import BotExcelPlugin
 class Bot(DesktopBot):
     def action(self, execution=None):
         import pandas as pd
-        base = pd.read_excel(r'C:\Users\rafael\Downloads\CORREÇÃO DAS ORDEM DOS ATOS DO 1º LOTE.xlsx','plan1', keep_default_na=False)
-        planilha = BotExcelPlugin().read(r"C:\Users\rafael\Downloads\qualificacao_atos_ancelmo.xlsx").set_nan_as(value='')
-        planilha.set_active_sheet('teste')
-        planilha2 = BotExcelPlugin().read(r"C:\Users\rafael\Downloads\qualificacao_atos_ancelmo.xlsx").set_nan_as(value='')
-        planilha2.set_active_sheet('atos')
-        dados = planilha.as_list()[1:]
-        dados2 = planilha2.as_list()[2:]
-        for i in range(1779):
+        base = pd.read_excel(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx",'Atos', keep_default_na=False)
+
+        for i in range(2104):
             matricula = str(base['MATRICULA'][i])
             num1 = str(base['NUMERO DO ATO'][i])
             num2 = str(base['NUMERO DO ATO'][i + 1])
@@ -31,18 +26,6 @@ class Bot(DesktopBot):
             else:
                 print(f'{matricula} - {num1} e {num2} sequencia certa')
                 pass
-
-
-
-
-
-
-
-
-
-
-
-
 
     def not_found(self, label):
         print(f"Element not found: {label}")
