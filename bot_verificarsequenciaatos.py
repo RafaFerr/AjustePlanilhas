@@ -1,34 +1,21 @@
 import logging
-<<<<<<< HEAD
-logging.basicConfig(level=logging.INFO, filename="C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\logs\log_sequencia_patricia.txt", format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
-=======
-logging.basicConfig(level=logging.INFO, filename="C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\logs\log_sequenciaatos_patricia.csv", format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
->>>>>>> f61b942b4a492a43a1800bb1970fd04cf2d321ee
+
+logging.basicConfig(level=logging.INFO, filename="C:\RPA\PlanilhaExcel\AjustarPlanilha\AjustarPlanilha\logs\log_sequenciaatos_ancelmo.txt", format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
+
 
 from botcity.core import DesktopBot
 from botcity.plugins.excel import BotExcelPlugin
 
 
-<<<<<<< HEAD
-=======
-# Uncomment the line below for integrations with BotMaestro
-# Using the Maestro SDK
-# from botcity.maestro import *
->>>>>>> f61b942b4a492a43a1800bb1970fd04cf2d321ee
-
 
 class Bot(DesktopBot):
     def action(self, execution=None):
         import pandas as pd
-<<<<<<< HEAD
-        base = pd.read_excel(r"C:\Users\rafael\Downloads\atos_patricia-3.xlsx",'Atos', keep_default_na=False)
 
-        for i in range(3415):
-=======
-        base = pd.read_excel(r"C:\Users\rafael\Downloads\Patricia_12.04.2023-22.05.2023.xlsx",'Atos', keep_default_na=False)
+        base = pd.read_excel(r"C:\Users\rafael\Downloads\atos_ancelmo.xlsx",'Atos', keep_default_na=False)
 
-        for i in range(2104):
->>>>>>> f61b942b4a492a43a1800bb1970fd04cf2d321ee
+        for i in range(2364):
+
             matricula = str(base['MATRICULA'][i])
             num1 = str(base['NUMERO DO ATO'][i])
             num2 = str(base['NUMERO DO ATO'][i + 1])
